@@ -12,7 +12,7 @@ router.get("/getAllcourse", getAllCourseController);
 router.get("/course/:id", getCourseByIdController);
 router.get("/quiz/:id", getQuizByIdController);
 router.post("/quiz", quizController);
-// story routes
+
 
 
 module.exports = router;

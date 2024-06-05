@@ -1,22 +1,155 @@
-### AL ###
-#Template for AL projects for Dynamics 365 Business Central
-#launch.json folder
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment variables
+.env
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pm2.log
+
+# Editor directories and files
+.idea/
 .vscode/
-#Cache folder
-.alcache/
-#Symbols folder
-.alpackages/
-#Snapshots folder
-.snapshots/
-#Testing Output folder
-.output/
-#Extension App-file
-*.app
-#Rapid Application Development File
-rad.json
-#Translation Base-file
-*.g.xlf
-#License-file
-*.flf
-#Test results file
-TestResults.xml
+*.sublime-project
+*.sublime-workspace
+
+# Mac system files
+.DS_Store
+
+# Coverage directory used by tools like istanbul
+coverage/
+
+# Production build files
+build/
+dist/
+
+# Optional npm cache directory
+.npm/
+
+# Optional eslint cache
+.eslintcache
+
+# Optional REPL history
+.node_repl_history
+
+# TypeScript
+*.tsbuildinfo
+
+# Optional stylelint cache
+.stylelintcache
+
+# SvelteKit
+.svelte-kit/
+
+# Storybook
+.storybook/
+
+# Next.js
+.next/
+
+# Nuxt.js
+.nuxt/
+
+# Vue.js
+.vuepress/dist/
+.vuepress/.temp/
+
+# Parcel
+.cache/
+.parcel-cache/
+
+# Sapper
+.sapper/
+
+# FuseBox
+.fusebox/
+
+# Gatsby files
+.cache/
+public/
+
+# Gridsome
+.cache/
+dist/
+
+# Laravel
+/vendor/
+.env.*.php
+
+# Nuxt.js
+.nuxt/
+
+# Serverless directories
+.serverless/
+
+# RAILS
+*.rbc
+capybara-*.html
+.rspec
+/log/*
+/tmp/*
+/db/*.sqlite3
+/db/*.sqlite3-journal
+/public/system/*
+/coverage/
+/spec/tmp/*
+*.orig
+rerun.txt
+pickle-email-*.html
+
+# Compiled source #
+###################
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# Packages
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# Logs and databases #
+######################
+*.log
+*.sql
+*.sqlite
+
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Editor directories and files
+##############################
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+*#
+.project
+.pydevproject
+*.pyc
+*.pyo
+*.pyd
