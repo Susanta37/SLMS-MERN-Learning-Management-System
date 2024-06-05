@@ -8,10 +8,44 @@ import {
   IoIosChatbubbles,
   IoIosLogIn,
 } from "react-icons/io";
+import { PiVideo } from 'react-icons/pi';
+
  
 const NavBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+
+
+
+  const courses = useSelector(state => state?.course?.courses)
+  const [search, setSearch] = useState(null)
+  const [searchedCourse, setSearchedCourse] = useState([]);
+  const [open, setOpen] = useState(false)
+  const [courseOpen, setCourseOpen] = useState(false)
+  const [isHovered, setIsHovered] = useState(false);
+  let token = useSelector((state) => state.authReducer.isLogin);
+const user = JSON.parse(localStorage.getItem("user"))
+  const navigate = useNavigate()
+  const [clicked, setClicked] = useState(false);
+  const dispatch = useDispatch()
+  console.log('searchedCourse.length', searchedCourse.length)
+  const handleLogout = () => {
+      localStorage.removeItem("user");
+      localStorage.removeItem("token");
+      dispatch(logoutAuth())
+      toast.success("Logged Out SuccessFully")
+      // navigate("/login")
+
+  }
+  useEffect(() => {
+      setSearchedCourse(
+          courses?.filter((item) => (
+              item?.name?.toLowerCase()?.includes(search?.toLowerCase())
+          ))
+      )
+  }, [search])
+
+
  
   const toggleSidebar = () => {
     setIsMenuOpen(!isMenuOpen);
