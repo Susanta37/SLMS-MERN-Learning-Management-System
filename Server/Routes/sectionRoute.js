@@ -8,7 +8,7 @@ router.post("/create", createSectionController);
 router.post("/delete", deleteSectionController);
 router.get("/getAllsection", getAllSectionController);
 router.get("/section/:id", getSectionByIdController);
-// story routes
+
 
 
 module.exports = router;
