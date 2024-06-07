@@ -2,6 +2,36 @@
 @tailwind components;
 @tailwind utilities;
 
-*::-webkit-scrollbar{
-    display: none;
+.section-content {
+    overflow: hidden;
+    transition: max-height 0.2s ease-in-out;
+    /* Adjust the duration and timing function as needed */
+    max-height: 0;
 }
+
+.section-content.open {
+    max-height: 1000px;
+    transition: max-height 0.2s ease-in-out;
+    /* Adjust the maximum height according to your content */
+}
+/* global.css */
+.delay-0 {
+    animation-delay: 0ms;
+  }
+  
+  .delay-200 {
+    animation-delay: 200ms;
+  }
+  
+  .delay-400 {
+    animation-delay: 400ms;
+  }
+  
+  .delay-600 {
+    animation-delay: 600ms;
+  }
+  
+  .delay-800 {
+    animation-delay: 800ms;
+  }
+  

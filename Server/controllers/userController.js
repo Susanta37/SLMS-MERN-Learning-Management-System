@@ -100,7 +100,7 @@ exports.getUserByIdControlller = async (req, res) => {
 
 exports.signUpUserController = async (req, res) => {
     try {
-        // console.log('req.body', req.body)
+        console.log('req.body', req.body)
         const { fname, email, lname, password } = req.body;
 
         if (!lname || !fname || !email || !password) {

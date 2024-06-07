@@ -1,252 +1,106 @@
-import React, { useState, useEffect } from "react";
-import { Link } from 'react-router-dom';
-import { FiMenu } from "react-icons/fi";
-import {
-  IoMdHome,
-  IoMdClose,
-  IoMdInformationCircle,
-  IoIosChatbubbles,
-  IoIosLogIn,
-} from "react-icons/io";
-import { PiVideo } from 'react-icons/pi';
+import React, { useEffect, useState } from 'react';
+import logo from "../assets/logof.png";
+import { IoIosSearch } from "react-icons/io";
+import { NavLink, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { FaArrowRightLong } from "react-icons/fa6";
+import { ImExit } from "react-icons/im";
+import { GiHamburgerMenu } from "react-icons/gi";
+import SideBar from './SideBar';
+import { RxCross2 } from "react-icons/rx";
+import { logoutAuth } from '../store/authReducer';
+import toast from 'react-hot-toast';
 
- 
 const NavBar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+    const courses = useSelector(state => state?.course?.courses);
+    const [search, setSearch] = useState("");
+    const [searchedCourse, setSearchedCourse] = useState([]);
+    const [open, setOpen] = useState(false);
+    const [isHovered, setIsHovered] = useState(false);
+    let token = useSelector((state) => state.authReducer.isLogin);
+    const user = JSON.parse(localStorage.getItem("user"));
+    const navigate = useNavigate();
+    const [clicked, setClicked] = useState(false);
+    const dispatch = useDispatch();
 
-
-
-  const courses = useSelector(state => state?.course?.courses)
-  const [search, setSearch] = useState(null)
-  const [searchedCourse, setSearchedCourse] = useState([]);
-  const [open, setOpen] = useState(false)
-  const [courseOpen, setCourseOpen] = useState(false)
-  const [isHovered, setIsHovered] = useState(false);
-  let token = useSelector((state) => state.authReducer.isLogin);
-const user = JSON.parse(localStorage.getItem("user"))
-  const navigate = useNavigate()
-  const [clicked, setClicked] = useState(false);
-  const dispatch = useDispatch()
-  console.log('searchedCourse.length', searchedCourse.length)
-  const handleLogout = () => {
-      localStorage.removeItem("user");
-      localStorage.removeItem("token");
-      dispatch(logoutAuth())
-      toast.success("Logged Out SuccessFully")
-      // navigate("/login")
-
-  }
-  useEffect(() => {
-      setSearchedCourse(
-          courses?.filter((item) => (
-              item?.name?.toLowerCase()?.includes(search?.toLowerCase())
-          ))
-      )
-  }, [search])
-
-
- 
-  const toggleSidebar = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
- 
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrolledPixels = window.scrollY;
-      const scrollThreshold = 100; 
- 
-      if (scrolledPixels > scrollThreshold) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
+    const handleLogout = () => {
+        localStorage.removeItem("user");
+        localStorage.removeItem("token");
+        dispatch(logoutAuth());
+        toast.success("Logged Out Successfully");
     };
- 
-    window.addEventListener("scroll", handleScroll);
- 
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
- 
-  return (
-    <div>
-      <nav
-        className={`top-0 left-0 right-0 md:w-screen h-20 flex justify-between items-center p-2 pr-4 text-black z-50  ${
-          scrolled ? "h-20 fixed shadow-md transition-top duration-500 ease-in-out bg-gray-100   text-black" : "bg-gradient-to-r from-rose-200 to-blue-200"
-        }`}
-        style={{
-          top: scrolled ? "0" : "-60px",
-        }}
-      >
-      <a href="#home">
-      <img
-  src=''
-  alt="image"
-  height={150}
-  width={130}
-  className="mt-3 ml-2 md:mt-4 mb-4 md:ml-20 "
-  draggable={false}
-/>
-      </a>
- 
- 
-        <div className="hidden md:flex container mx-auto justify-center items-center">
-          <ul className="flex mx-auto gap-7">
-            <li>
-              <a
-                href="#home"
-                className=" hover:text-rose-500 hover:no-underline"
-              >
-                <b>Home </b>
-              </a>
-            </li>
-            <li>
-              <a
-                href="#project"
-                className=" hover:text-rose-500 hover:no-underline"
-              >
-                <b>About</b>
-              </a>
-            </li>
-            <li>
-              <a
-                href="#experience"
-                className=" hover:text-rose-500 hover:no-underline"
-              >
-                <b>Services </b>
-              </a>
-            </li>
-            <li>
-              <a
-                href="#contact"
-                className=" hover:text-rose-500 hover:no-underline"
-              >
-                <b>Contact </b>
-              </a>
-            </li>
-          </ul>
-          {/* <div className="mr-9">
-            <button className="text-white rounded-full hover:bg-red-600  border border-red-500  hover:border-red-50 hover:scale-110 hover:delay-300">
-              Get in Touch
-            </button>
-          </div> */}
-<div className="mr-9 flex gap-5">
-  {/* <a href="https://www.instagram.com/susant_37" target="_blank" rel="noopener noreferrer" className="text-green-700 hover:text-green -600  hover:scale-110 ease-in-out transition-all duration-300">
-    <FiInstagram />
-  </a> */}
- 
-<div className="flex gap-8 px-4">
-<Link to="/login" className={`${scrolled?"bg-blue-300":"bg-gray-200"}  px-10 py-2 rounded-full items-center flex hover:bg-rose-400 font-bold transition-all ease-in-out duration-500 hover:scale-105 hover:text-white`
-}>
-Sign in
- 
-</Link>
-<Link  to="/signup" className="border border-blue-400 px-10 py-2 rounded-full items-center flex hover:bg-rose-400 font-bold transition-all ease-in-out duration-500 hover:scale-105 hover:text-white">
-  Sign up
- 
-</Link>
-</div>
- 
- 
- 
 
-</div>
- 
- 
-        </div>
-        <div className="md:hidden">
-          <FiMenu
-            className="text-white hover:text-rose-500 hover:no-underline ml-2 mr-5 cursor-pointer"
-            size={24}
-            onClick={toggleSidebar}
-          />
-        </div>
-      </nav>
- 
-      {isMenuOpen && (
-        <div
-          className={`fixed inset-y-0 right-0 w-75 bg-rose-200 shadow-md z-50 transform transition duration-500 ease-in-out  ${
-            isMenuOpen ? "translate-x-0" : "-translate-x-full"
-          }`}
-        >
-          <div className="flex justify-between items-center p-4  ">
-            {/* Close icon */}
-            <IoMdClose
-              className="text-black hover:text-green-600 hover:no-underline cursor-pointer"
-              size={24}
-              onClick={toggleSidebar}
-            />
-            <img
-              src=''
-              alt="image"
-              height={80}
-              width={140}
-              className="mt-3 mr-6 ml-2 md:mt-4 mb-4 md:ml-12 "
-              draggable={false}
-           
-            />
-          </div>
-          <ul className="py-4 flex flex-col pt-5 gap-5">
-            <li>
-              <a
-                href="#home"
-                className="text-black hover:text-green-600 hover:no-underline"
-                onClick={toggleSidebar}
-              >
-                <b className="pl-12 flex gap-5">
-                  {" "}
-                  <IoMdHome />
-                  Home
-                </b>
-              </a>
-            </li>
-            <li>
-              <a
-                href="#project"
-                className="text-black hover:text-green-600 hover:no-underline"  onClick={toggleSidebar}
-              >
-                <b className="pl-12 flex gap-5">
-                  <IoMdInformationCircle />
-                  Project
-                </b>
-              </a>
-            </li>
-            <li>
-              <a
-                href="#experience"
-                className="text-black hover:text-green-600 hover:no-underline"  onClick={toggleSidebar}
-              >
-                <b className="pl-12 flex gap-5">
-                  <IoIosChatbubbles />
-                  Experience
-                </b>
-              </a>
-            </li>
-            <li>
-              <a
-                href="#contact"
-                className="text-black hover:text-green-600 hover:no-underline"  onClick={toggleSidebar}
-              >
-                <b className="pl-12 flex gap-5">
-                  <IoIosLogIn />
-                  Contact
-                </b>
-              </a>
-            </li>
-          </ul>
-          <div className="pl-12 pt-7">
-          <Link to="/carrear">
-              <button className="pl-6 pr-6 rounded-full px-8  border border-green-900 text-black h-10 font-semibold bg-green-600 hover:bg-red-800 hover:border-black hover:text-white hover:scale-110 transition-transform duration-300 mr-4">
-                My Career
-              </button>
-            </Link>
-          </div>
-        </div>
-      )}
-    </div>
-  );
+    useEffect(() => {
+        if (search) {
+            setSearchedCourse(
+                courses?.filter((item) => (
+                    item?.name?.toLowerCase()?.includes(search.toLowerCase())
+                ))
+            );
+        } else {
+            setSearchedCourse([]);
+        }
+    }, [search, courses]);
+
+    return (
+        <>
+            <SideBar open={open} handleClose={() => { setOpen(false); }} />
+            <div className='shadow-md w-full flex gap-2 justify-between items-center bg-zinc-800'>
+                <div className='w-[60%] md:w-[20%] h-full flex items-center justify-center'>
+                    <img onClick={() => { navigate("/") }} src={logo} className='w-40 h-full rounded-md object-cover cursor-pointer' alt="" />
+                </div>
+                <span className='md:hidden flex pr-4' onClick={() => { setOpen(state => !state); }}>
+                    <GiHamburgerMenu size={26} />
+                </span>
+                <div onClick={() => { setIsHovered(state => !state); }} className="relative px-4 py-2 cursor-pointer bg-blue-100 md:block hidden text-sky-700 font-bold rounded-md">
+                    Courses
+                </div>
+                {isHovered && (
+                    <div className="absolute z-10 top-[60px] left-[22%] h-[350px] overflow-y-scroll rounded-md bg-white shadow-lg p-6 flex flex-col gap-4">
+                        <span onClick={() => { setIsHovered(false); }} className='flex w-full text-red-500 cursor-pointer transition-all duration-500 ease-in-out justify-end'>
+                            <RxCross2 />
+                        </span>
+                        {courses?.map((item, index) => (
+                            <span onClick={() => { navigate(`/courses/${item?._id}`); }}
+                                className="flex gap-2 cursor-pointer hover:text-cyan-500 hover:translate-x-1 duration-300 ease-in-out items-center"
+                                key={index}
+                            >
+                                <FaArrowRightLong className="text-xs" /> {item?.name}
+                            </span>
+                        ))}
+                    </div>
+                )}
+                <form onSubmit={(e) => { e.preventDefault(); }} className='relative w-[30%] md:flex hidden md:w-[20%] bg-blue-200 h-10 items-center p-4 justify-between rounded-md'>
+                    <input value={search} name='search' onChange={(e) => { setSearch(e.target.value); }}
+                        onFocus={() => { setClicked(true); }} placeholder='Search Courses' className="w-[90%] bg-transparent outline-none" type="text" />
+                    <button type='submit'><IoIosSearch /></button>
+                </form>
+                {clicked && (
+                    <div className={`top-[60px] left-[35%] h-fit overflow-y-scroll rounded-full bg-white shadow-lg p-6 ${searchedCourse.length > 0 ? "flex absolute z-10" : "hidden"} flex-col gap-4`}>
+                        <span onClick={() => { setClicked(false); setSearchedCourse([]); }} className='flex w-full text-red-500 cursor-pointer transition-all duration-500 ease-in-out justify-end'>
+                            <RxCross2 />
+                        </span>
+                        {searchedCourse?.map((item, index) => (
+                            <span onClick={() => { setClicked(false); setSearchedCourse([]); navigate(`/courses/${item?._id}`); }}
+                                className='flex gap-2 cursor-pointer hover:text-cyan-500 hover:translate-x-1 duration-300 ease-in-out items-center'
+                                key={index}
+                            >
+                                <FaArrowRightLong className="text-xs" /> {item?.name}
+                            </span>
+                        ))}
+                    </div>
+                )}
+                <div className='w-[50%] md:w-[40%] hidden md:flex justify-center gap-6'>
+                    {<NavLink to={"/login"} className={`${!token ? "flex" : "hidden"} items-center justify-center w-28 bg-cyan-500 hover:scale-105 capitalize duration-300 ease-in-out font-bold text-white rounded-md py-2`}>log in</NavLink>}
+                    {<button onClick={() => { navigate("/admindashboard/0") }} className={`${token && user?.isAdmin ? "flex" : "hidden"} items-center justify-center w-28 hover:scale-105 capitalize duration-300 ease-in-out font-bold text-red-500 animate-pulse rounded-md py-2`}>Admin page</button>}
+                    {<NavLink to={"/signup"} className={`${!token ? "block" : "hidden"} px-6 bg-white hover:scale-105 duration-300 capitalize ease-in-out font-bold text-gray-800 border border-black rounded-md py-2`}>sign up</NavLink>}
+                    {<NavLink to={`/profile/${0}`} className={`${token ? "flex" : "hidden"} px-6 bg-white hover:scale-105 duration-300 capitalize ease-in-out items-center font-bold text-gray-800 rounded-md py-2`}>My Courses</NavLink>}
+                    {<NavLink to={"/profile/1"} className={`${token ? "block" : "hidden"} hover:scale-105 duration-300 ease-in-out`}><img src="https://imgs.search.brave.com/MpXwHc3OUm2Z6U4IpSlZYWHSjIjjlpPpCfqrJaRwat0/rs:fit:500:0:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJzLmNvbS9p/bWFnZXMvaGQvY29v/bC1hbmltZS1wcm9m/aWxlLXBpY3R1cmUt/Z21wdW9ldnlkam15/eXR4eS5qcGc" className='w-[50px] h-[50px] rounded-full' alt="" /></NavLink>}
+                    {<button onClick={handleLogout} className={`${token ? "block" : "hidden"} flex items-center gap-2 font-bold hover:scale-105 duration-300 ease-in-out`}> Logout <ImExit /></button>}
+                </div>
+            </div>
+        </>
+    );
 };
- 
+
 export default NavBar;
