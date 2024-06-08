@@ -1,93 +1,149 @@
-import * as React from "react";
-import Box from "@mui/material/Box";
-import SwipeableDrawer from "@mui/material/SwipeableDrawer";
-import logo from "../assets/logof.png";
-import { FaAngleRight } from "react-icons/fa";
-import { FaAngleDown } from "react-icons/fa";
-import { useSelector } from "react-redux";
+import React from "react";
+import { Box, SwipeableDrawer, List, ListItem, ListItemText, ListItemIcon, Divider, Avatar, Button } from "@mui/material";
+import { FaAngleRight, FaAngleDown } from "react-icons/fa";
 import { IoLogOut } from "react-icons/io5";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-export default function SideBar({ open, handleClose }) {
+import logo from "../assets/logof.png";
+
+const SideBar = ({ open, handleClose }) => {
   const navigate = useNavigate();
-  const [index, setIndex] = React.useState(false);
+  const [coursesOpen, setCoursesOpen] = React.useState(false);
   const courses = useSelector((state) => state?.course?.courses);
   const user = JSON.parse(localStorage.getItem("user"));
-  let value = useSelector((state) => state.authReducer.isLogin);
-  return (
-    <div>
-      <React.Fragment>
-        <SwipeableDrawer
-          open={open}
-          onClose={() => {
-            handleClose();
-          }}
-        >
-          <div className=" w-60  flex flex-col gap-4">
-            {value && (
-              <>
-                {" "}
-                <span className=" p-2 w-full h-fit flex  gap-2 items-center ">
-                  {" "}
-                  hello {user?.name?.slice(0,10)}{" "}
-                </span>
-                <span onClick={()=>{ handleClose();  navigate("/profile/1")}} className="  w-full h-fit flex px-4 py-1 rounded-md  bg-cyan-400 border border-cyan-800 text-white  gap-2 justify-between items-center ">
-                  {" "}
-                  view Profile
-                  <IoLogOut className=" text-red-500 text-sm md:text-base" />{" "}
-                </span>
-                <span onClick={()=>{ handleClose();  navigate("/admindashboard/0")}} className="  w-full h-fit flex px-4 py-1 rounded-md  bg-cyan-400 border border-cyan-800 text-white  gap-2 justify-between items-center ">
-                  {" "}
-                  view Admin Panel
-                 
-                </span>
-              </>
-            )}
-            {!value && (
-              <>
-                {" "}
-                <span className=" p-2 w-full h-fit flex flex-col gap-2 justify-between items-center ">
-                  <span className=" w-full relative font-italianno flex flex-col items-center justify-center  ">
-                    <span className=" absolute top-0 left-50">WellCome to</span>{" "}
-                    <img onClick={()=>{handleClose();navigate("/")}} src={logo} className=" w-full h-28 " alt="" />{" "}
-                  </span>
-                  <span className=" w-full justify-evenly flex items-center  ">
-                    <span onClick={()=>{handleClose();navigate("/login")}} className=" px-4 py-1 rounded-md  bg-cyan-400 border border-cyan-800 text-white">login</span> <span onClick={()=>{handleClose();navigate("/signup")}} className=" px-2 py-1 rounded-md border border-cyan-400 shadow-sm shadow-cyan-400 ">sign up</span>
-                  </span>{" "}
-                </span>
-               
-              </>
-            )}
-            <span
-              onClick={() => {
-                setIndex((state) => !state);
-              }}
-              className="px-6  flex justify-between w-full h-fit "
-            >
-              Courses {!index ? <FaAngleRight /> : <FaAngleDown />}{" "}
-            </span>
-          </div>
+  const isLoggedIn = useSelector((state) => state.authReducer.isLogin);
 
-          <div
-            className={`px-4 h-full ${
-              index ? "flex" : "hidden"
-            } transition-all mt-4 ease-in-out duration-500 flex-col gap-4`}
-          >
-            {courses?.map((item, index) => (
-              <span
-                onClick={() => {
-                  handleClose();
-                  navigate(`/courses/${item?._id}`);
-                }}
-                key={index}
-                className=" px-4 flex items-center justify-between text-xs  w-full "
-              >
-                {" "}
-                {item?.name} <FaAngleRight />{" "}
-              </span>
-            ))}
-          </div>
-        </SwipeableDrawer>
-      </React.Fragment>
-    </div>
+  const handleCourseToggle = () => {
+    setCoursesOpen(!coursesOpen);
+  };
+
+  return (
+    <SwipeableDrawer
+      anchor="left"
+      open={open}
+      onClose={handleClose}
+      onOpen={() => {}}
+    >
+      <Box
+        sx={{
+          width: 250,
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          height: "100%",
+        }}
+      >
+        <Box>
+          <List>
+            {isLoggedIn && user && (
+              <Box sx={{ textAlign: "center", py: 2 }}>
+                <Avatar sx={{ width: 56, height: 56, mx: "auto" }}>
+                  {user.name.charAt(0)}
+                </Avatar>
+                <Box mt={1} mb={2}>
+                  <strong>{user.name}</strong>
+                </Box>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={() => {
+                    handleClose();
+                    navigate("/profile/1");
+                  }}
+                  fullWidth
+                >
+                  View Profile
+                </Button>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  onClick={() => {
+                    handleClose();
+                    navigate("/admindashboard/0");
+                  }}
+                  fullWidth
+                  sx={{ mt: 1 }}
+                >
+                  Admin Panel
+                </Button>
+              </Box>
+            )}
+
+            {!isLoggedIn && (
+              <Box sx={{ textAlign: "center", py: 2 }}>
+                <Box mb={2}>
+                  <img src={logo} alt="Logo" style={{ width: "100%", height: "auto" }} />
+                </Box>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={() => {
+                    handleClose();
+                    navigate("/login");
+                  }}
+                  fullWidth
+                >
+                  Login
+                </Button>
+                <Button
+                  variant="outlined"
+                  color="primary"
+                  onClick={() => {
+                    handleClose();
+                    navigate("/signup");
+                  }}
+                  fullWidth
+                  sx={{ mt: 1 }}
+                >
+                  Sign Up
+                </Button>
+              </Box>
+            )}
+
+            <Divider />
+            <ListItem button onClick={handleCourseToggle}>
+              <ListItemText primary="Courses" />
+              <ListItemIcon>{coursesOpen ? <FaAngleDown /> : <FaAngleRight />}</ListItemIcon>
+            </ListItem>
+            {coursesOpen && (
+              <Box sx={{ pl: 2 }}>
+                {courses?.map((item, index) => (
+                  <ListItem
+                    button
+                    key={index}
+                    onClick={() => {
+                      handleClose();
+                      navigate(`/courses/${item?._id}`);
+                    }}
+                  >
+                    <ListItemText primary={item?.name} />
+                    <ListItemIcon><FaAngleRight /></ListItemIcon>
+                  </ListItem>
+                ))}
+              </Box>
+            )}
+          </List>
+        </Box>
+
+        {isLoggedIn && (
+          <Box sx={{ p: 2 }}>
+            <Button
+              variant="contained"
+              color="error"
+              startIcon={<IoLogOut />}
+              onClick={() => {
+                handleClose();
+                // Add logout logic here
+              }}
+              fullWidth
+            >
+              Logout
+            </Button>
+          </Box>
+        )}
+      </Box>
+    </SwipeableDrawer>
   );
-}
+};
+
+export default SideBar;

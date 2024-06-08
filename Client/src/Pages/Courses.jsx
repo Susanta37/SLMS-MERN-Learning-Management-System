@@ -1,6 +1,6 @@
-import axios from 'axios'
-import React, { useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { HiOutlineMinusSm } from "react-icons/hi";
 import { FaRupeeSign } from "react-icons/fa";
 import { ImTree } from "react-icons/im";
@@ -78,29 +78,36 @@ const Courses = () => {
     }
 
     return (
-        <div className="w-full flex flex-col md:flex-row h-full md:h-screen overflow-y-scroll pb-10">
-            <div className="md:w-3/5 w-full flex flex-col justify-between p-4 pt-10 md:pt-16 md:overflow-y-scroll h-fit md:h-full">
-                <div className="w-full h-auto md:h-1/2 flex flex-col gap-4">
-                    <span className="text-2xl md:text-4xl font-bold">{course?.name}</span>
-                    <span className="text-sm md:text-lg font-semibold">{course?.descrption}</span>
-                    <span className="text-sm">Created At: {date}</span>
+        <div className="flex flex-col md:flex-row h-full md:h-screen overflow-y-auto bg-gray-100 pb-10">
+            <div className="md:w-3/5 w-full flex flex-col justify-between p-4 pt-10 md:pt-16 h-auto md:h-full">
+                <div className="bg-white p-6 rounded-lg shadow-md mb-6">
+                    <h1 className="text-3xl md:text-4xl font-bold mb-4">{course?.name}</h1>
+                    <p className="text-sm md:text-lg font-semibold text-gray-700 mb-4">{course?.descrption}</p>
+                    <p className="text-sm text-gray-500">Created At: {date}</p>
                 </div>
-                <div className="flex flex-col gap-2 w-full h-auto md:h-1/2 md:justify-start justify-end cursor-pointer">
-                    <div className="flex justify-between border border-gray-900 p-2 rounded-md shadow-md bg-white">
-                        <span className="text-sm md:text-lg font-bold">Curriculum for this course:</span>
-                        <span className="text-sm md:text-base">{totalSections} Lessons</span>
+                <div className="flex flex-col gap-2">
+                    <div className="bg-white p-4 rounded-lg shadow-md mb-4">
+                        <div className="flex justify-between items-center">
+                            <h2 className="text-lg md:text-xl font-bold">Curriculum for this course:</h2>
+                            <span className="text-sm md:text-base">{totalSections} Lessons</span>
+                        </div>
                     </div>
                     {course?.section?.map((sub, index) => (
                         <div className="flex flex-col gap-2" key={index}>
-                            <div className="flex justify-between border border-gray-900 p-2 shadow-md bg-white rounded-md" onClick={() => toggleDetails(index)}>
-                                <span className="flex gap-1 text-sm md:text-lg items-center">{!showDetails[index] ? <LuPlus /> : <HiOutlineMinusSm />} {sub?.sectionName}</span>
-                                <span className="text-sm md:text-base">{sub?.subSection?.length} Lessons</span>
+                            <div 
+                                className="flex justify-between items-center bg-white p-4 rounded-lg shadow-md cursor-pointer" 
+                                onClick={() => toggleDetails(index)}
+                            >
+                                <span className="flex gap-1 items-center text-lg">
+                                    {!showDetails[index] ? <LuPlus /> : <HiOutlineMinusSm />} {sub?.sectionName}
+                                </span>
+                                <span className="text-base">{sub?.subSection?.length} Lessons</span>
                             </div>
                             <div className={showDetails[index] ? 'flex flex-col gap-2' : 'hidden'}>
                                 {sub?.subSection?.map((item, index) => (
-                                    <div className="flex justify-between border text-sm text-cyan-600 font-semibold border-gray-900 p-2 shadow-md bg-gray-50 rounded-md" key={index}>
-                                        <span className="flex items-center gap-1 text-sm md:text-lg"><PiVideo /> {item?.title}</span>
-                                        <span className="text-sm md:text-base">{item?.timeDuration}</span>
+                                    <div className="flex justify-between items-center bg-gray-50 p-4 rounded-lg shadow-md text-cyan-600 font-semibold" key={index}>
+                                        <span className="flex items-center gap-1 text-lg"><PiVideo /> {item?.title}</span>
+                                        <span className="text-base">{item?.timeDuration}</span>
                                     </div>
                                 ))}
                             </div>
@@ -108,22 +115,30 @@ const Courses = () => {
                     ))}
                 </div>
             </div>
-            <div className="md:w-2/5 w-full h-full pt-10 md:pt-0 md:h-auto flex justify-center items-center">
-                <div className="w-11/12 md:w-3/4 rounded-lg overflow-hidden shadow-xl border border-gray-300 bg-white">
-                    <img className="w-full h-48 md:h-60 object-cover" draggable='false' src={course?.thumbnail} alt="Thumbnail" />
-                    <div className="px-6 pt-4">
-                        <div className="font-bold text-xl mb-2">{course?.type}</div>
-                        <p className="text-sm mb-2">
-                            {course?.descrption}
-                        </p>
+            <div className="md:w-2/5 w-full flex justify-center items-center p-4">
+                <div className="w-full md:w-4/5 bg-white rounded-lg shadow-xl">
+                    <img className="w-full h-48 md:h-60 object-cover rounded-t-lg" draggable='false' src={course?.thumbnail} alt="Thumbnail" />
+                    <div className="p-6">
+                        <h2 className="font-bold text-xl mb-2">{course?.type}</h2>
+                        <p className="text-sm mb-4 text-gray-700">{course?.descrption}</p>
                         <div className="flex justify-between py-2 px-4 border-t border-gray-300">
-                            <span className="flex gap-1 items-center font-bold"><FaRupeeSign />{course?.price}</span>
-                            <span className="flex items-center gap-2 font-bold"><ImTree /> {course?.section?.length} Sections</span>
+                            <span className="flex items-center gap-1 font-bold text-lg"><FaRupeeSign />{course?.price}</span>
+                            <span className="flex items-center gap-2 font-bold text-lg"><ImTree /> {course?.section?.length} Sections</span>
                         </div>
                         {course?.user?.some(us => user?._id === us?.user) ? (
-                            <button onClick={changeRoute} className="w-full py-3 bg-purple-600 text-lg font-bold text-white rounded-md hover:bg-purple-700">Start Learning</button>
+                            <button 
+                                onClick={changeRoute} 
+                                className="w-full py-3 mt-4 bg-purple-600 text-lg font-bold text-white rounded-md hover:bg-purple-700 transition-all duration-300"
+                            >
+                                Start Learning
+                            </button>
                         ) : (
-                            <button onClick={handleEnroll} className="w-full py-3 bg-purple-600 text-lg font-bold text-white rounded-md hover:bg-purple-700">Enroll</button>
+                            <button 
+                                onClick={handleEnroll} 
+                                className="w-full py-3 mt-4 bg-purple-600 text-lg font-bold text-white rounded-md hover:bg-purple-700 transition-all duration-300"
+                            >
+                                Enroll
+                            </button>
                         )}
                     </div>
                 </div>

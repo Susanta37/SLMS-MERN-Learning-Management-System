@@ -14,6 +14,7 @@ import SideBar from '../Components/SideBar'
 import { useSelector } from 'react-redux'
 import CreateCourse from '../Components/CreateCourse'
 import AdminDashboard from '../Admin/AdminDashboard'
+import Signin from '../Pages/SignIn'
 
 const Route = () => {
 
@@ -44,7 +45,7 @@ const Route = () => {
     }
     const Layout2 = () => {
         let value = useSelector(state => state.authReducer.isLogin);
-        console.log('value', value)
+        // console.log('value', value)
         if (value) {
             return <Navigate to={"/"} />;
         }
@@ -124,7 +125,7 @@ const Route = () => {
             children: [
                 {
                     path: "/login",
-                    element: <LoginPage />
+                    element: <Signin />
                 },
                 {
                     path: "/Signup",

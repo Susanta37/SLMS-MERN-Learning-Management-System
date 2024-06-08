@@ -51,17 +51,17 @@ const CertificatePdf = ({ visible, onClose, user, mark, date, course }) => {
                 <div ref={componentRef} className="p-10">
                     <div className="text-center border-b-2 border-gray-300 pb-4">
                         <p className="text-sm text-gray-500">Certificate ID: {course?._id}</p>
-                        <h1 className="text-3xl font-semibold text-gray-700 mb-2">Certificate Of Completion</h1>
+                        <h1 className="text-3xl font-semibold text-gray-700 mb-2">Certificate Of Achievement</h1>
                         <p className="text-sm text-gray-500">Issued on: {date}</p>
                     </div>
                     <div className="text-center my-8">
-                        <p className="text-lg font-medium">Proudly Awarded To</p>
+                        <p className="text-lg font-medium">This is to Certify That</p>
                         <h2 className="text-2xl font-semibold text-gray-800 mt-2">{user?.name}</h2>
                     </div>
                     <div className="text-center mb-8">
-                        <p className="text-md text-gray-600">For Successfully Completing The</p>
+                        <p className="text-md text-gray-600">Has Successfully Completed the Course</p>
                         <p className="text-lg font-medium text-gray-700">{course?.name}</p>
-                        <p className="text-sm text-gray-500">in {date} at hyscalar.co.in</p>
+                        <p className="text-sm text-gray-500">Issued on {date} by hyscalar.co.in</p>
                     </div>
                     <div className="text-center mb-4">
                         <p className="text-lg font-medium border-b border-gray-300 inline-block">Monalisha Panda</p>
@@ -73,7 +73,7 @@ const CertificatePdf = ({ visible, onClose, user, mark, date, course }) => {
                         <img className="w-16 md:w-24" src={logo} alt="Logo" />
                         <img
                             className="w-10 md:w-16"
-                            src="https://imgs.search.brave.com/RYaGue90DrpQ0eOhloooYRKGxmS2U3MeGUA5_tEEGbU/rs:fit:860:0:0/g:ce/aHR0cHM6Ly91cGxv/YWQud2lraW1lZGlh/Lm9yZy93aWtpcGVk/aWEvY29tbW9ucy90/aHVtYi9kL2QwL1FS/X2NvZGVfZm9yX21v/YmlsZV9FbmdsaXNo/X1dpa2lwZWRpYS5z/dmcvNjQwcHgtUVJf/Y29kZV9mb3JfbW9i/aWxlX0VuZ2xpc2hf/V2lraXBlZGlhLnN2/Zy5wbmc"
+                            src="https://imgs.search.brave.com/RYaGue90DrpQ0eOhloooYRKGxmS2U3MeGUA5_tEEGbU/rs:fit:860:0:0/g:ce/aHR0cHM6Ly91cGxv/YWQud2lraW1lZGlh/Lm9yZy93aWtpcGVk/aWEvY29tbW9ucy90/aHVtYi9kL2QwL1FS/X2NvZGVfZm9yX21v/YmlsZV9FbmdsaXNo/X1dpa2lwZWRpZGlh/X3N2Zy5z/dmcvNjQwcHgtUVJf/Y29kZV9mb3JfbW9i/aWxlX0VuZ2xpc2hf/V2lraXBlZGlhLnN2/Zy5wbmc"
                             alt="QR Code"
                         />
                     </div>

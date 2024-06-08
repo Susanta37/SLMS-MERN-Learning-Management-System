@@ -24,7 +24,7 @@ const sectionRoute = require("./Routes/sectionRoute")
 app.use("/user", userRoute)
 app.use("/course", courseRoute)
 app.use("/section", sectionRoute)
-// app.use(errorMiddleWare);
+
 
 
 
