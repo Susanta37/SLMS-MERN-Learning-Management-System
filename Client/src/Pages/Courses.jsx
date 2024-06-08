@@ -78,8 +78,8 @@ const Courses = () => {
     }
 
     return (
-        <div className="flex flex-col md:flex-row h-full md:h-screen overflow-y-auto bg-gray-100 pb-10">
-            <div className="md:w-3/5 w-full flex flex-col justify-between p-4 pt-10 md:pt-16 h-auto md:h-full">
+        <div className="flex flex-col md:flex-row h-screen bg-gray-100 pb-10">
+            <div className="md:w-3/5 w-full overflow-y-auto flex flex-col justify-between p-4 pt-10 md:pt-16 h-auto md:h-full">
                 <div className="bg-white p-6 rounded-lg shadow-md mb-6">
                     <h1 className="text-3xl md:text-4xl font-bold mb-4">{course?.name}</h1>
                     <p className="text-sm md:text-lg font-semibold text-gray-700 mb-4">{course?.descrption}</p>
@@ -148,3 +148,4 @@ const Courses = () => {
 }
 
 export default Courses;
+

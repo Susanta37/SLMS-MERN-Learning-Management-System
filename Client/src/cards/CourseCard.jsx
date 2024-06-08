@@ -5,22 +5,21 @@ import { ImTree } from "react-icons/im";
 
 const CourseCard = ({ course }) => {
     const [isFlipped, setIsFlipped] = useState(false);
-    const navigate = useNavigate()
-    const handleClick = (item) => {
-        navigate(`/courses/${course?._id}`)
+    const navigate = useNavigate();
+
+    const handleClick = () => {
+        navigate(`/courses/${course?._id}`);
     };
-
-
 
     return (
         <div
             className={`not-selectable w-[320px] relative rounded-[10px] overflow-hidden shadow-xl border border-gray-300 md:m-4 border-1  bg-gray-100  text-black hover:border-2 hover:border-cyan-600 hover:scale-110 transition-transform duration-300 hover:text-cyan-400 ${isFlipped ? "rotate-back" : ""
-                }`}
+            } md:w-full md:max-w-[320px]`}
             onClick={handleClick}
         >
             <div
                 className={`transform ${isFlipped ? "rotateY-180" : ""
-                    } h-72 transition-transform duration-300 ease-in-out`}
+                } h-72 transition-transform duration-300 ease-in-out`}
             >
                 <img className="w-full h-[60%] object-cover" draggable='false' src={course?.thumbnail} alt="Thumbnail" />
                 <div className="px-6 pt-4">

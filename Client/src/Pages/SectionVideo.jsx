@@ -12,7 +12,7 @@ const SectionVideo = () => {
     const { id } = useParams()
     const [course, setCourse] = useState({})
     const [video, setVideo] = useState({
-        videoUrl:"https://youtu.be/W6NZfCO5SIk?feature=shared"
+        videoUrl:"https://youtu.be/9Tz2tY-ZEwQ?si=YwQGTgakadqVp7a3"
     })
     const [showDetails, setShowDetails] = useState([]);
     const [loading, setLoading] = useState(false)

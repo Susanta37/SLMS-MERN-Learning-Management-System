@@ -31,6 +31,7 @@ const SideBar = ({ open, handleClose }) => {
           flexDirection: "column",
           justifyContent: "space-between",
           height: "100%",
+        
         }}
       >
         <Box>
@@ -133,7 +134,7 @@ const SideBar = ({ open, handleClose }) => {
               startIcon={<IoLogOut />}
               onClick={() => {
                 handleClose();
-                // Add logout logic here
+                
               }}
               fullWidth
             >

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import signLogo from '../assets/logoo.png';
 import axios from 'axios';
@@ -6,7 +6,8 @@ import toast from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
 import { loginAuth } from '../store/authReducer';
 import { url } from '../Utilities/serverUrl';
-import logo1 from '../assets/logof.png'
+import logo1 from '../assets/logof.png';
+
 const Signin = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -44,9 +45,23 @@ const Signin = () => {
         setLoading(false);
     };
 
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth <= 768) {
+                document.getElementById("left-div").style.display = "none";
+            } else {
+                document.getElementById("left-div").style.display = "block";
+            }
+        };
+
+        handleResize();
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
+
     return (
         <div className='flex flex-col md:flex-row h-screen'>
-            <div className="w-full md:w-1/2 bg-gradient-to-r from-rose-100 to-blue-100 h-full flex flex-col justify-center items-center p-4">
+            <div id="left-div" className="w-full md:w-1/2 bg-gradient-to-r from-rose-100 to-blue-100 h-full flex flex-col justify-center items-center p-4">
                 <img src={signLogo} alt="login" className='w-3/4 md:w-2/4' />
                 <span className='text-2xl md:text-3xl font-semibold'>Welcome to</span>
                 <span className='text-xl md:text-3xl font-semibold'>Hyscaller LMS</span>

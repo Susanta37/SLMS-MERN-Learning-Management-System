@@ -18,21 +18,14 @@ const CertificateCard = ({ course, mark }) => {
             <CertificatePdf visible={open} mark={mark} date={date} onClose={() => { setOpen(false); }} user={user} course={course} />
             <div className="not-selectable w-[340px] relative rounded-lg overflow-hidden shadow-lg border border-gray-300 md:m-4 bg-white text-black transition-transform hover:scale-105 duration-300 ease-in-out">
 
-                <div className="h-72">
-                    <img className="w-full h-[70%] object-fit transition-transform hover:scale-105 duration-300 ease-in-out " draggable='false' src={course?.thumbnail} alt="Thumbnail" />
-                    <div className="px-6 pt-4 w-full">
+                <div className="h-[200px]">
+                    <img className="w-full h-[70%] object-fit" src={course?.thumbnail} alt="Thumbnail" />
+                    <div className="px-6 pt-4">
                         <div className="font-semibold text-sm md:text-base mb-2">
                             <span className="block text-gray-700">Course Name:</span>
                             <span className="text-gray-600">{course?.type}</span>
                         </div>
-                        <div className="font-semibold text-sm md:text-base mb-2">
-                            <span className="block text-gray-700">Certificate Id:</span>
-                            <span className="text-gray-600">{course?._id}</span>
-                        </div>
-                        <div className="font-semibold text-sm md:text-base mb-2">
-                            <span className="block text-gray-700">Issued On:</span>
-                            <span className="text-gray-600">{date}</span>
-                        </div>
+        
                     </div>
                 </div>
 

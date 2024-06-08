@@ -53,7 +53,7 @@ const Route = () => {
 
         return (
             <div className='flex flex-col h-screen overflow-hidden justify-evenly'>
-                <div className=' w-full flex   h-[10%] '>
+                <div className=' w-full flex   h-[110px] '>
                     <NavBar />
                 </div>
 
